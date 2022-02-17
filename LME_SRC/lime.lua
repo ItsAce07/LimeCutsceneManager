@@ -46,12 +46,14 @@ function lim.setCameraMode(camera, enum_mode)
 
 	local try = 3;
 	local ok, ng = pcall(function()
-		camera.CameraType = enum_mode;
+		repeat wait()
+			camera.CameraType = enum_mode;	
+		until ok or try == 3;
 	end)
 	if ok then
 		print("pass!");
 	elseif ng then
-		warn("fail!");
+		warn("fail! error: " .. tostring(ng));
 	end
 end
 
@@ -127,5 +129,7 @@ function lim.tweenBlur(blur, bool)
 		blur.Size = 0;
 	end
 end
+
+
 
 return lim;
